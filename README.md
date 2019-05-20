@@ -2,10 +2,17 @@
 A simple RestApi Client built with go
 
 ### run
-fist go to the main directory: `cd src/server`
 
+```
+# running localy 
+go run server.go
 
-running localy `go run server.go`
-**Or**
-build `go build server.go`
-run the compiled application: `./server`
+# build
+go build server.go
+
+# run the compiled application:
+./server`
+
+# Compile to ARM7
+env GOOS=linux GOARCH=arm GOARM=7 go build
+```
