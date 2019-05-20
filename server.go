@@ -9,10 +9,20 @@ import (
 	"github.com/gobuffalo/packr/v2"
 )
 
-func Message(status bool, message string) map[string]interface{} {
-	return map[string]interface{}{"status": status, "message": message}
+type Request struct {
+	SSID       string `json:"ssid"`
+	Passphrase string `json:"passphrase"`
 }
 
+// Message Creates a JSON Object.
+func Message(success bool, message string) map[string]interface{} {
+	return map[string]interface{}{
+		"success": success,
+		"message": message,
+	}
+}
+
+// Respond returns a JSON respons to the caller.
 func Respond(w http.ResponseWriter, data map[string]interface{}) {
 	w.Header().Add("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(data)
@@ -38,15 +48,24 @@ func serveHTML(w http.ResponseWriter, r *http.Request) {
 	t.Execute(w, "")
 }
 
-func restApi(w http.ResponseWriter, r *http.Request) {
+func restAPI(w http.ResponseWriter, r *http.Request) {
 	switch r.Method {
 	case http.MethodGet:
+		// Response with shower id to verify the connection
 		Respond(w, Message(true, "All Good"))
 	case http.MethodPost:
-		ssid := r.PostFormValue("ssid")
-		passphrase := r.PostFormValue("passphrase")
+		decoder := json.NewDecoder(r.Body)
+		var req Request
+		err := decoder.Decode(&req)
+		if err != nil {
+			panic(err)
+		}
 
-		message := "ssid = " + ssid + ", passphrase = " + passphrase
+		message := "SSID=" + req.SSID + ", pass=" + req.Passphrase
+
+		// Test to connect to WiFi
+		// If it works Respond success ("the device will now reboot")
+		// if it does not work ("Return error message")
 
 		Respond(w, Message(true, message))
 	case http.MethodPut:
@@ -60,8 +79,12 @@ func restApi(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
+	box := packr.New("someBoxName", "./pages/static/")
+
 	http.HandleFunc("/", serveHTML)
-	http.HandleFunc("/api", restApi)
+	http.HandleFunc("/api", restAPI)
+
+	http.Handle("/static/", http.StripPrefix("/static/", http.FileServer(box)))
 	if err := http.ListenAndServe(":8080", nil); err != nil {
 		panic(err)
 	}

@@ -9,6 +9,8 @@
 *.so
 *.dylib
 *-packr.go
+server
+go_rest_api
 
 # Test binary, build with `go test -c`
 *.test

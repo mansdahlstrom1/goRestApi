@@ -1,7 +1,20 @@
-<h1>Index</h1>
-
-<form action="/api" method="POST">
-  <div><input name="ssid" placeholder="SSID" /></div>
-  <div><input name="passphrase" type="passphrase" placeholder="passphrase" /></div>
-  <div><input type="submit" value="Save"></div>
-</form>
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Orbital Wifi Paring</title>
+    <link rel="stylesheet" type="text/css" href="./static/style.css" />
+    <script src="./static/script.js" type="application/javascript" async> </script>
+  </head>
+  <body>
+    <section>
+      <div>
+        <h1>Enter wifi Credentials</h1>
+        <form id="wifi-form" action="/api" method="POST">
+          <div><input id="ssid" name="ssid" placeholder="SSID" /></div>
+          <div><input id="passphrase" name="passphrase" type="password" placeholder="passphrase" /></div>
+          <div><input id="submit" type="submit" value="Submit"></div>
+        </form>
+      </div>
+    </section>
+  </body>
+</html>

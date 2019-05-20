@@ -1,0 +1,64 @@
+html, body {
+  background: #f4f4f4;
+  letter-spacing: 1.1px;
+  font-size: 13px;
+}
+
+h1 {
+  text-align: center;
+}
+
+section {
+  height:70vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+input {
+  width: 100%;
+  background: 0;
+  margin: 5px auto;
+  border: 0;
+  text-align: center;
+  color: rgb(31, 31, 31);
+  box-sizing: border-box;
+  padding: 0.75rem;
+  border-bottom: 1px solid rgb(145, 145, 145);
+}
+
+form {
+  width: 100%;
+  box-sizing: border-box;
+  max-width: 350px;
+  text-align: center;
+}
+
+input:focus,
+select:focus,
+textarea:focus,
+button:focus {
+  outline: none;
+}
+
+input[type="submit"] {
+  text-align: center;
+  text-transform: uppercase;
+  width: max-content;
+  box-shadow: rgba(0, 0, 0, 0.12) 0px 0px 15px 0px;
+  position: relative;
+  color: rgb(255, 255, 255);
+  opacity: 1;
+  letter-spacing: 1.5px;
+  cursor: pointer;
+  display: block;
+  padding: 11px 22px 9px;
+  border-radius: 15px;
+  border-width: initial;
+  border-style: none;
+  border-color: initial;
+  border-image: initial;
+  background: rgb(31, 31, 31);
+  margin: 10px auto;
+  transition: opacity 0.2s ease 0s, transform 0.2s ease 0s;
+}
