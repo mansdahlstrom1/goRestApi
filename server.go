@@ -9,6 +9,7 @@ import (
 	"github.com/gobuffalo/packr/v2"
 )
 
+// Request struct
 type Request struct {
 	SSID       string `json:"ssid"`
 	Passphrase string `json:"passphrase"`
@@ -61,13 +62,16 @@ func restAPI(w http.ResponseWriter, r *http.Request) {
 			panic(err)
 		}
 
-		message := "SSID=" + req.SSID + ", pass=" + req.Passphrase
-
 		// Test to connect to WiFi
 		// If it works Respond success ("the device will now reboot")
 		// if it does not work ("Return error message")
 
-		Respond(w, Message(true, message))
+		if req.SSID == "fail" {
+			Respond(w, Message(false, "Could not connect to network \""+req.SSID+"\""))
+		} else {
+			Respond(w, Message(true, "SSID="+req.SSID+", pass="+req.Passphrase))
+		}
+
 	case http.MethodPut:
 		Respond(w, Message(true, "HTTP method not supported"))
 	case http.MethodDelete:

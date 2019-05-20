@@ -9,6 +9,10 @@
     <section>
       <div>
         <h1>Enter wifi Credentials</h1>
+        <div id="error-box">
+          <p id="error-title"></p>
+          <p id="error-message"></p>
+        </div>
         <form id="wifi-form" action="/api" method="POST">
           <div><input id="ssid" name="ssid" placeholder="SSID" /></div>
           <div><input id="passphrase" name="passphrase" type="password" placeholder="passphrase" /></div>
